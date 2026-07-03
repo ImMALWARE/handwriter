@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Ensure Venv",
+            "type": "shell",
+            "command": "if [ ! -d .venv ]; then python3 -m venv .venv && .venv/bin/pip install -r requirements.txt; fi",
+            "windows": {
+                "command": "if not exist .venv (python -m venv .venv && .venv\\Scripts\\pip install -r requirements.txt)"
+            },
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Ensure Translations",
+            "type": "shell",
+            "command": "if [ ! -f handwriter/translations/ru.qm ] || [ ! -f handwriter/translations/ru.ts ]; then .venv/bin/python handwriter/translations/translate.py; fi",
+            "windows": {
+                "command": "if not exist handwriter\\translations\\ru.qm (.venv\\Scripts\\python handwriter\\translations\\translate.py) else if not exist handwriter\\translations\\ru.ts (.venv\\Scripts\\python handwriter\\translations\\translate.py)"
+            },
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Ensure Resources",
+            "type": "shell",
+            "command": "if [ ! -f handwriter/resources_rc.py ]; then .venv/bin/pyside6-rcc resources.qrc -o handwriter/resources_rc.py; fi",
+            "windows": {
+                "command": "if not exist handwriter\\resources_rc.py (.venv\\Scripts\\pyside6-rcc resources.qrc -o handwriter\\resources_rc.py)"
+            },
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Pre-Launch Setup",
+            "dependsOn": [
+                "Ensure Venv",
+                "Ensure Translations",
+                "Ensure Resources"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "reveal": "silent"
+            }
+        }
+    ]
+}

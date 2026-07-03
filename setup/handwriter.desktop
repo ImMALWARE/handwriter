@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Handwriter
+Comment=Handwritten text editor
+Comment[ru]=Редактор рукописного текста
+Exec=handwriter %f
+Icon=handwriter
+Categories=Office;TextEditor;Utility;
+MimeType=application/x-hwdoc;application/x-hfont;application/x-hwpap;

@@ -1,0 +1,194 @@
+QMainWindow {
+    background-color: {COL_BASE};
+}
+
+QMenuBar {
+    background-color: {COL_MANTLE};
+    color: {COL_TEXT};
+    border-bottom: 1px solid {COL_SURFACE0};
+    padding: 2px 0;
+}
+
+QMenuBar::item:selected {
+    background-color: {COL_SURFACE1};
+    border-radius: 8px;
+}
+
+QMenu {
+    background-color: {COL_BASE};
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE0};
+    border-radius: 12px;
+    padding: 8px;
+}
+
+QMenu::item:selected {
+    background-color: {COL_SURFACE1};
+    border-radius: 8px;
+}
+
+QStatusBar {
+    background-color: {COL_MANTLE};
+    color: {COL_TEXT};
+    border-top: 1px solid {COL_SURFACE0};
+    font-size: 15px;
+    padding: 2px 8px;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+QStatusBar QLabel {
+    font-size: 15px;
+    color: {COL_TEXT};
+    background: transparent;
+}
+
+QScrollBar:vertical {
+    background: {COL_MANTLE};
+    width: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: {COL_SURFACE1};
+    border-radius: 5px;
+    min-height: 30px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: {COL_SURFACE2};
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar:horizontal {
+    background: {COL_MANTLE};
+    height: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: {COL_SURFACE1};
+    border-radius: 5px;
+    min-width: 30px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: {COL_SURFACE2};
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0;
+}
+
+QToolButton#ribbonButton {
+    background-color: transparent;
+    color: {COL_TEXT};
+    border: none;
+    border-radius: 12px;
+    padding: 4px 8px 6px 8px;
+    font-size: 10px;
+}
+
+QToolButton#ribbonButton:hover {
+    background-color: {COL_SURFACE1};
+}
+
+QToolButton#ribbonButton:pressed {
+    background-color: {COL_SURFACE2};
+}
+
+QToolButton#ribbonButton:checked {
+    background-color: {COL_SURFACE1};
+    border: 1px solid {COL_BLUE};
+}
+
+QFrame#ribbonSeparator {
+    background-color: {COL_SURFACE1};
+    max-height: 60px;
+}
+
+QLabel#ribbonGroupTitle {
+    color: {COL_SUBTEXT};
+    font-size: 9px;
+    padding: 0;
+    margin: 0;
+}
+
+RibbonSpinBox {
+    background-color: {COL_SURFACE0};
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE1};
+    border-radius: 8px;
+    padding: 4px 6px;
+    min-width: 60px;
+    max-width: 80px;
+    font-size: 11px;
+}
+
+RibbonSpinBox::up-button, RibbonSpinBox::down-button {
+    width: 14px;
+    background-color: transparent;
+    border: none;
+}
+
+RibbonSpinBox::up-button:hover, RibbonSpinBox::down-button:hover {
+    background-color: {COL_SURFACE2};
+    border-radius: 4px;
+}
+
+RibbonSpinBox::up-arrow, RibbonSpinBox::down-arrow {
+    image: none;
+    width: 0;
+    height: 0;
+}
+
+QLabel#labeledSpinBoxLabel {
+    color: {COL_SUBTEXT};
+    font-size: 9px;
+}
+
+QTabWidget#ribbonTabWidget::pane {
+    border: none;
+    background-color: {COL_MANTLE};
+    border-bottom: 1px solid {COL_SURFACE0};
+}
+
+QTabWidget#ribbonTabWidget QTabBar::tab {
+    background-color: transparent;
+    color: {COL_SUBTEXT};
+    border: none;
+    padding: 6px 16px;
+    margin: 4px 2px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 70px;
+}
+
+QTabWidget#ribbonTabWidget QTabBar::tab:selected {
+    color: {COL_BASE};
+    background-color: {COL_BLUE};
+}
+
+QTabWidget#ribbonTabWidget QTabBar::tab:hover:!selected {
+    color: {COL_TEXT};
+    background-color: {COL_SURFACE0};
+}
+
+QLabel#fontLabel {
+    color: {COL_RED};
+    font-size: 11px;
+    font-style: italic;
+    padding-right: 8px;
+}
+
+QLabel#fontLabel[fontLoaded="true"] {
+    color: {COL_GREEN};
+    font-weight: bold;
+    font-style: normal;
+}

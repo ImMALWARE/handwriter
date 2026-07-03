@@ -1,0 +1,186 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  buildnum:
+    name: Determine Build Number
+    runs-on: ubuntu-latest
+    outputs:
+      BUILD_NUM: ${{ steps.buildnum.outputs.BUILD_NUM }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine build number
+        id: buildnum
+        shell: bash
+        run: |
+          git fetch --tags || true
+          TAG_PREFIX="handwriter-"
+          LAST_NUM=$(git tag -l "${TAG_PREFIX}*" | sed "s/${TAG_PREFIX}//" | sort -n | tail -1)
+          if [ -z "$LAST_NUM" ]; then
+            BUILD_NUM=1
+          else
+            BUILD_NUM=$((LAST_NUM + 1))
+          fi
+          echo "BUILD_NUM=$BUILD_NUM" >> "$GITHUB_OUTPUT"
+          echo "Next Build number: $BUILD_NUM"
+
+  windows:
+    needs: buildnum
+    strategy:
+      matrix:
+        include:
+          - arch: AMD64
+            runner: windows-latest
+          - arch: ARM64
+            runner: windows-11-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: ${{ matrix.arch == 'ARM64' && 'arm64' || 'x64' }}
+
+      - name: Install dependencies
+        run: |
+          pip install nuitka pyside6 pyphen svgpathtools svgwrite qtawesome
+
+      - name: Build Translations and Resources
+        run: |
+          python handwriter/translations/translate.py
+          pyside6-rcc resources.qrc -o handwriter/resources_rc.py
+
+      - name: Build with Nuitka
+        run: |
+          python -m nuitka --windows-console-mode=disable --nofollow-import-to=scipy --low-memory --assume-yes-for-downloads --standalone --include-module=_json --include-module=_bisect --output-filename=Handwriter --enable-plugin=pyside6 --noinclude-qt-translations --windows-icon-from-ico=img/handwriter.ico --include-data-dir=handwriter/translations=translations --include-data-files=img/handwriter.png=img/handwriter.png --output-dir=dist handwriter/main.py
+          mv dist/main.dist dist/Handwriter
+
+      - name: Compile Inno Setup
+        run: iscc /DAppVersion="${{ needs.buildnum.outputs.BUILD_NUM }}" /DArch="${{ matrix.arch == 'ARM64' && 'arm64' || 'x64' }}" setup/installer.iss
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-${{ matrix.arch }}
+          path: Output/Handwriter-Windows-${{ matrix.arch }}.exe
+
+  macos:
+    needs: buildnum
+    strategy:
+      matrix:
+        include:
+          - os: macos-15-intel
+            arch: intel
+          - os: macos-14
+            arch: arm
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install nuitka pyside6 pyphen svgpathtools svgwrite qtawesome
+          brew install create-dmg
+
+      - name: Build Translations and Resources
+        run: |
+          python handwriter/translations/translate.py
+          pyside6-rcc resources.qrc -o handwriter/resources_rc.py
+
+      - name: Build with Nuitka
+        run: |
+          python -m nuitka --nofollow-import-to=scipy --assume-yes-for-downloads --standalone --include-module=_json --include-module=_bisect --output-filename=Handwriter --macos-create-app-bundle --macos-app-name="Handwriter" --enable-plugin=pyside6 --noinclude-qt-translations --macos-app-icon=img/handwriter.icns --include-data-dir=handwriter/translations=translations --include-data-files=img/handwriter.png=img/handwriter.png --output-dir=dist handwriter/main.py
+          if [ -d "dist/main.app" ]; then mv dist/main.app dist/Handwriter.app; fi
+
+      - name: Run macOS Setup
+        run: bash setup/macos_setup.sh ${{ matrix.arch }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}
+          path: Handwriter-macOS-${{ matrix.arch }}.dmg
+
+  linux:
+    needs: buildnum
+    strategy:
+      matrix:
+        include:
+          - arch: x64
+            runner: ubuntu-latest
+            fpm_arch: amd64
+            rpm_arch: x86_64
+            appimage_arch: x86_64
+          - arch: arm
+            runner: ubuntu-24.04-arm
+            fpm_arch: arm64
+            rpm_arch: aarch64
+            appimage_arch: aarch64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby ruby-dev rubygems build-essential rpm libgl1 qt6-base-dev libegl1 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2t64 libxi6 libxtst6 libarchive-tools zstd patchelf ccache
+          sudo gem install fpm
+          pip install nuitka pyside6 pyphen svgpathtools svgwrite qtawesome
+
+      - name: Build Translations and Resources
+        run: |
+          python handwriter/translations/translate.py
+          pyside6-rcc resources.qrc -o handwriter/resources_rc.py
+
+      - name: Build with Nuitka
+        run: |
+          python -m nuitka --nofollow-import-to=scipy --assume-yes-for-downloads --standalone --include-module=_json --include-module=_bisect --output-filename=handwriter --enable-plugin=pyside6 --noinclude-qt-translations --linux-icon=img/handwriter.png --include-data-dir=handwriter/translations=translations --include-data-files=img/handwriter.png=img/handwriter.png --output-dir=dist handwriter/main.py
+          mv dist/main.dist dist/handwriter
+
+      - name: Run Linux Setup
+        run: bash setup/linux_setup.sh ${{ needs.buildnum.outputs.BUILD_NUM }} ${{ matrix.arch }} ${{ matrix.fpm_arch }} ${{ matrix.rpm_arch }} ${{ matrix.appimage_arch }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-${{ matrix.arch }}
+          path: |
+            handwriter-linux-${{ matrix.arch }}.deb
+            handwriter-linux-${{ matrix.arch }}.rpm
+            handwriter-linux-${{ matrix.arch }}.pkg.tar.zst
+            handwriter-linux-${{ matrix.arch }}.AppImage
+
+  release:
+    needs: [buildnum, windows, macos, linux]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release_files
+          merge-multiple: true
+  
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "handwriter-${{ needs.buildnum.outputs.BUILD_NUM }}"
+          name: "Handwriter Build ${{ needs.buildnum.outputs.BUILD_NUM }}"
+          body: |
+            Automated Release Build ${{ needs.buildnum.outputs.BUILD_NUM }}
+          files: release_files/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: 'v2.11'
+    hooks:
+      - id: vulture
+        args: ["handwriter", "vulture_whitelist.py"]
+  - repo: local
+    hooks:
+      - id: translate
+        name: Validate Translations
+        entry: python handwriter/translations/translate.py
+        language: system
+        pass_filenames: false
+        always_run: true

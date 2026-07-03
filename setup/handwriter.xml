@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-hwdoc">
+    <comment>Handwriter Document</comment>
+    <glob pattern="*.hwdoc"/>
+  </mime-type>
+  <mime-type type="application/x-hfont">
+    <comment>Handwriter Font</comment>
+    <glob pattern="*.hfont"/>
+  </mime-type>
+  <mime-type type="application/x-hwpap">
+    <comment>Handwriter Paper Preset</comment>
+    <glob pattern="*.hwpap"/>
+  </mime-type>
+</mime-info>

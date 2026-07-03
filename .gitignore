@@ -1,0 +1,5 @@
+.venv/
+**/__pycache__
+handwriter/translations/ru.ts
+handwriter/translations/ru.qm
+handwriter/resources_rc.py

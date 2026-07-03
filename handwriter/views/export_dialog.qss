@@ -1,0 +1,92 @@
+QDialog {
+    background-color: {COL_BASE};
+    color: {COL_TEXT};
+}
+QLabel {
+    color: {COL_TEXT};
+    font-size: 12px;
+}
+QGroupBox {
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE0};
+    border-radius: 12px;
+    margin-top: 8px;
+    padding-top: 14px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 4px;
+}
+QLineEdit, QSpinBox {
+    background-color: {COL_SURFACE0};
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE1};
+    border-radius: 8px;
+    padding: 4px 16px 4px 8px;
+}
+QSpinBox::up-button, QSpinBox::down-button {
+    width: 0;
+    height: 0;
+    border: none;
+}
+
+QPushButton#CancelButton {
+    background-color: transparent;
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE2};
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+}
+QPushButton#CancelButton:hover {
+    background-color: {COL_SURFACE0};
+    border: 1px solid {COL_BLUE};
+    border-radius: 20px;
+    color: {COL_BLUE};
+}
+QPushButton#CancelButton:pressed {
+    background-color: {COL_SURFACE1};
+    border-radius: 20px;
+}
+
+QPushButton#ExportButton {
+    background-color: {COL_BLUE};
+    color: {COL_BLUE_TEXT};
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+}
+QPushButton#ExportButton:hover {
+    background-color: {COL_BLUE_HOVER};
+    border-radius: 20px;
+}
+QPushButton#ExportButton:pressed {
+    background-color: {COL_BLUE_HOVER};
+    border-radius: 20px;
+}
+QPushButton#ExportButton:disabled {
+    background-color: {COL_SURFACE1};
+    color: {COL_SURFACE2};
+    border-radius: 20px;
+}
+
+QPushButton#BrowseButton {
+    background-color: {COL_SURFACE0};
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE1};
+    border-radius: 8px;
+    padding: 4px 16px;
+}
+QPushButton#BrowseButton:hover {
+    background-color: {COL_SURFACE1};
+    border: 1px solid {COL_BLUE};
+    border-radius: 8px;
+}
+QPushButton#BrowseButton:pressed {
+    background-color: {COL_SURFACE2};
+    border-radius: 8px;
+}

@@ -1,0 +1,54 @@
+QPlainTextEdit {
+    background-color: {COL_MANTLE};
+    color: {COL_TEXT};
+    border: none;
+    selection-background-color: {COL_SURFACE2};
+    selection-color: {COL_TEXT};
+    font-family: monospace;
+    font-size: 12pt;
+}
+
+QLabel#PlaceholderLabel {
+    color: {COL_SUBTEXT};
+    font-size: 16px;
+    font-weight: bold;
+}
+
+QPushButton#PlaceholderButton {
+    background-color: {COL_SURFACE0};
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE1};
+    border-radius: 18px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: bold;
+}
+QPushButton#PlaceholderButton:hover {
+    background-color: {COL_SURFACE1};
+}
+
+QGraphicsView {
+    background-color: {COL_BASE};
+    border: none;
+}
+
+QPushButton#ZoomButtonSquare, QPushButton#ZoomButtonFit {
+    background-color: {COL_SURFACE0};
+    color: {COL_TEXT};
+    border: 1px solid {COL_SURFACE1};
+    border-radius: 14px;
+    font-size: 12px;
+    padding: 4px 8px;
+}
+QPushButton#ZoomButtonSquare:hover, QPushButton#ZoomButtonFit:hover {
+    background-color: {COL_SURFACE1};
+}
+
+
+
+
+
+QSplitter::handle {
+    background-color: {COL_SURFACE0};
+    width: 2px;
+}

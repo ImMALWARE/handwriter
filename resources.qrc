@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>handwriter/views/main_window.qss</file>
+        <file>handwriter/views/font_editor.qss</file>
+        <file>handwriter/views/document_editor.qss</file>
+        <file>handwriter/views/export_dialog.qss</file>
+    </qresource>
+</RCC>
