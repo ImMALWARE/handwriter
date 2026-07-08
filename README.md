@@ -8,7 +8,7 @@
 
 # Handwriter
 
-**Language:**  <a href="https://github.com/ImMALWARE/handwriter/blob/main/README_en.md"><img src="https://github.com/loanelly/handwriter/blob/main/img/EN1.png" height="21" align="center"/></a> <a href="https://github.com/ImMALWARE/handwriter/blob/main/README.md"><img src="https://github.com/loanelly/handwriter/blob/patch-1/img/Flags/result.png" height="21" align="center"/></a>
+**Language:**  <a href="https://github.com/ImMALWARE/handwriter/blob/main/README_en.md"><img src="https://github.com/loanelly/handwriter/blob/main/img/EN1.png" height="21" align="center"/></a> <a href="https://github.com/ImMALWARE/handwriter/blob/main/README.md"><img src="https://github.com/loanelly/handwriter/blob/patch-1/img/Flags/result.png" height="26" align="center"/></a>
 
 
 ---
