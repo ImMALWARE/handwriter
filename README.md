@@ -1,20 +1,12 @@
-
-
-
-
-
 <img src="img/handwriter.png" align="right" width="100px">
-
 
 # Handwriter
 
-**Language:**  <a href="https://github.com/ImMALWARE/handwriter/blob/main/README_en.md"><img src="img/Flags/EN1.png" height="21" align="center"/></a> <a href="https://github.com/ImMALWARE/handwriter/blob/main/README.md"><img src="img/Flags/result.png" height="26" align="center"/></a>
-
+**README**:  <a href="https://github.com/ImMALWARE/handwriter/blob/main/README_en.md"><img src="img/en_flag.png" height="21" align="center"/>In English</a> <a href="https://github.com/ImMALWARE/handwriter/blob/main/README.md"><img src="img/ru_flag.png" height="26" align="center"/>На русском</a>
 
 ---
 
- *Handwriter* — программа для перевода печатного текста в рукописный вид с возможностью создания собственных шрифтов из вашего почерка. Проект генерирует готовые векторные файлы (SVG) и управляющий G-код для автоматического рисования на ЧПУ-плоттерах.
-
+ *Handwriter* — программа для перевода печатного текста в рукописный вид с возможностью создания собственных шрифтов из вашего почерка. Генерирует готовые векторные файлы (SVG) и управляющий G-код для автоматического рисования на плоттерах.
 
 ## Редактор шрифтов (Создание шрифта)
 

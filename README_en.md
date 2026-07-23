@@ -1,13 +1,12 @@
 <img src="img/handwriter.png" align="right" width="100px">
 
-
 # Handwriter
 
-**Language:**  <a href="https://github.com/ImMALWARE/handwriter/blob/main/README_en.md"><img src="img/Flags/EN1.png" height="21" align="center"/></a> <a href="https://github.com/ImMALWARE/handwriter/blob/main/README.md"><img src="img/Flags/result.png" height="26" align="center"/></a>
+**README:**  <a href="https://github.com/ImMALWARE/handwriter/blob/main/README_en.md"><img src="img/en_flag.png" height="21" align="center"/>In English</a> <a href="https://github.com/ImMALWARE/handwriter/blob/main/README.md"><img src="img/ru_flag.png" height="26" align="center"/>На русском</a>
 
 ---
 
-*Handwriter* - is a tool that converts typed text into realistic handwriting and lets you create custom fonts from your own handwriting. The software generates ready-to-use vector files (SVG) and G-code to automate drawing on CNC plotters.
+*Handwriter* is a tool that converts typed text into handwriting and lets you create custom fonts from your own handwriting. The software generates ready-to-use vector files (SVG) and G-code to automate drawing on plotters.
 
 ## Font Editor (Creating a font)
 
